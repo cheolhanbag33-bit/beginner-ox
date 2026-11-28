@@ -113,29 +113,57 @@ select{background:var(--card);border:1px solid var(--line);border-radius:14px;pa
 @media(max-width:600px){nav{margin-left:0;width:100%}nav a{flex:1;justify-content:center;padding:8px}.hd{padding:8px 0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}img{-webkit-user-drag:none;pointer-events:auto}@media print{body{display:none!important}}
+
 /* 무한의 탑 */
 .twr{color:inherit;text-decoration:none;max-width:620px;border:2px solid var(--blue);margin-bottom:6px}.twr img{width:52px;height:auto;flex:none}.twr b{font-size:18px}.twr .go{margin-left:auto;font-size:28px;font-weight:900;color:var(--blue2)}
-.tw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
-.stage{--g:115px;position:relative;height:380px;border-radius:22px;overflow:hidden;background:linear-gradient(#0f1f6e,#2446c9 70%,#3f6bff);color:#fff}
-.stage .sky{position:absolute;inset:0;background:radial-gradient(circle at 62% 30%,#ffffff1c 0 34px,transparent 35px),radial-gradient(circle at 20% 30%,#ffffff18 0 2px,transparent 3px),radial-gradient(circle at 60% 12%,#ffffff18 0 2px,transparent 3px)}
-.floors{position:absolute;left:0;right:0;bottom:0;height:100%}
-.floors.up{animation:drop .5s ease-out}
-@keyframes drop{from{transform:translateY(calc(-1 * var(--g)))}to{transform:none}}
-.fl{position:absolute;left:14px;right:14px;height:14px;border-radius:7px;background:#ffffff38;box-shadow:inset 0 -3px 0 #0003}
-.fl span{position:absolute;right:8px;top:-26px;font-weight:900;font-size:15px;opacity:.85}
-.fl.now{background:#ffd34d}.fl.now span{color:#ffd34d;opacity:1}
-.pig{position:absolute;left:18px;bottom:44px;width:78px;transition:left .8s linear;z-index:2}
-.pig img{width:100%;display:block;transform-origin:50% 100%}
-.pig.run{left:calc(100% - 110px)}.pig.run img{animation:bob .2s infinite alternate}
-.pig.fall img{animation:fall .7s ease-in forwards}
-@keyframes bob{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-10px) rotate(4deg)}}
-@keyframes fall{to{transform:translateY(80px) rotate(90deg);opacity:.3}}
-.hud{position:absolute;left:16px;top:14px;right:16px;display:flex;justify-content:space-between;font-weight:900;z-index:3}
-.hud .now{font-size:30px;line-height:1}.hud small{display:block;font-size:13px;font-weight:700;opacity:.8}
-.over{text-align:center;padding:10px 0}.over .big{font-size:56px;font-weight:900;color:var(--blue2);line-height:1.1}
-.scope{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.scope button{border:2px solid var(--line);border-radius:12px;padding:6px 14px;font-weight:700}.scope button.on{border-color:var(--blue);background:var(--soft);color:var(--blue2)}
-@media(max-width:860px){.tw{grid-template-columns:1fr}.stage{--g:100px;height:340px}}
-@media(prefers-reduced-motion:reduce){.pig{transition:none}.pig img,.floors.up{animation:none!important}}
+#tw{max-width:1100px;margin:0 auto;display:grid;gap:14px}
+#tw:fullscreen{background:var(--bg);padding:16px;overflow:auto}
+.tbar{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 14px}
+.tbar .flag{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.tbar .fl small{display:block;font-size:12px;font-weight:700;color:var(--mute);line-height:1.2}.tbar .fl b{font-size:30px;font-weight:900;line-height:1}.tbar .fl b i{font-style:normal;font-size:14px;margin-left:2px}
+.tbar .tier{border-left:1px solid var(--line);padding-left:14px;font-weight:800;font-size:15px}
+.tier .tn{display:flex;align-items:center;gap:6px}.hearts{letter-spacing:2px;font-size:17px;line-height:1.2;color:#b3264f}.hearts .e{color:var(--line)}
+.tbar .rt{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tbtn{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center}
+.timer{background:var(--soft);color:var(--blue2);border-radius:10px;padding:6px 10px;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}.timer.low{color:#c4221b;background:light-dark(#fde8e7,#3a1a1a)}
+.scene{position:relative;border-radius:22px;overflow:hidden;border:3px solid #23284a;background:#0d1030;aspect-ratio:5/2}
+.scene canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.scene .pg{position:absolute;left:27%;bottom:10%;height:38%;transform-origin:50% 100%;filter:drop-shadow(0 4px 0 #0005)}
+.scene .pg.run{animation:hop .18s infinite alternate}.scene .pg.hurt{animation:hurt .45s}
+@keyframes hop{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-7%) rotate(5deg)}}
+@keyframes hurt{0%,100%{transform:none}25%{transform:translateX(-6%) rotate(-8deg)}75%{transform:translateX(6%) rotate(8deg)}}
+.zone{position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:10px;background:#141833dd;color:#fff;border:1px solid #ffffff40;border-radius:14px;padding:8px 14px 8px 10px}
+.zone .zi{width:36px;height:36px;border-radius:10px;background:#ffffff1f;display:grid;place-items:center;font-size:20px}
+.zone small{display:block;font-size:11px;opacity:.8;line-height:1.2}.zone b{font-size:22px;font-weight:900;line-height:1.15}
+.cpb{position:absolute;right:12px;top:12px;background:#141833dd;color:#fff;border-radius:12px;padding:6px 10px;font-weight:800;font-size:13px;text-align:right}
+.cpb.bot{top:auto;bottom:12px}
+.dash{display:flex;gap:3px;margin-top:4px;justify-content:flex-end}.dash i{width:10px;height:4px;border-radius:2px;background:#ffffff40}.dash i.on{background:#ffd34d}
+.qc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 22px 20px}
+.qc .qt{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--mute);font-size:15px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.qc .qt .tg{margin-left:auto;background:var(--soft);color:var(--blue2);border-radius:8px;padding:2px 10px;font-size:13px}
+.qc .bossnote{color:#6d3fc0;font-weight:700;font-size:15px;margin:12px 0 0}
+.qc .st{font-size:clamp(19px,2.3vw,23px);font-weight:800;line-height:1.6;margin:14px 0 0;word-break:keep-all}
+.fb{margin-top:14px;border-radius:14px;padding:12px 16px;background:var(--soft)}.fb .h{display:flex;justify-content:space-between;font-weight:900}.fb.ok .h{color:var(--okink)}.fb.bad .h{color:#b3264f}.fb p{margin:6px 0 0;white-space:pre-line;word-break:keep-all}
+.oxb{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.oxb button{background:var(--card);border:1px solid var(--line);border-bottom-width:4px;border-radius:16px;min-height:64px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:19px;font-weight:800}
+.oxb .o{border-bottom-color:#9fd8b0}.oxb .x{border-bottom-color:#f1b3c4}
+.oxb .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:22px}.oxb .o .ic{background:#e3f5e8;color:#1d6b3a}.oxb .x .ic{background:#fbe3ea;color:#9b2357}
+.oxb button.sel.o{background:#e9f7ee;color:#1d6b3a}.oxb button.sel.x{background:#fcebf0;color:#9b2357}
+.nextb{width:100%;min-height:58px;border-radius:16px;background:#232a6b;color:#fff;font-weight:800;font-size:18px}
+.dark{position:relative;border-radius:22px;overflow:hidden;background:#0f1226;color:#fff;padding:22px}
+.dark .scene{border-color:#2d3466}
+.dark h2{margin:0 0 6px;font-size:26px}.dark p{margin:0;opacity:.8}
+.arrow{width:52px;height:52px;border-radius:14px;background:#ffffff1a;border:1px solid #ffffff40;color:#fff;font-size:26px;display:grid;place-items:center}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.opts button{border:1px solid #ffffff40;border-radius:12px;padding:6px 14px;font-weight:700;color:#fff;background:#ffffff10}.opts button.on{background:#fff;color:#1f2a6b}
+.res{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:14px}
+.ban{position:relative;border-radius:18px;overflow:hidden;background:radial-gradient(circle at 75% 50%,#3c3f7a,#1a1c3a 60%);color:#fff;padding:28px;min-height:190px;display:flex;flex-direction:column;justify-content:center}
+.ban h2{margin:6px 0;font-size:34px}.ban .em{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:130px;height:130px;border-radius:50%;border:2px solid #ffffff40;background:#ffffff12;display:grid;place-items:center}.ban .em img{height:96px}
+.stat2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat2 div{background:var(--soft);border-radius:14px;padding:12px 14px}.stat2 small{color:var(--mute);font-size:13px}.stat2 b{display:block;font-size:26px;font-weight:900}
+.wl{display:grid;gap:10px}.wl details{border:1px solid var(--line);border-radius:14px;padding:12px 16px}.wl summary{list-style:none;cursor:pointer;display:flex;gap:10px;align-items:flex-start}.wl summary::-webkit-details-marker{display:none}
+.wl .tag{margin-left:auto;background:#fbe3ea;color:#9b2357;border-radius:8px;padding:0 8px;font-weight:800;font-size:13px;flex:none}
+.wl .chip{display:inline-block;border-radius:8px;padding:2px 10px;font-weight:800;margin:10px 6px 0 0}.chip.me{background:#fbe3ea;color:#9b2357}.chip.an{background:#e3f5e8;color:#1d6b3a}
+@media(max-width:700px){.tbar{flex-wrap:wrap;gap:10px}.tbar .rt{margin-left:0;width:100%;justify-content:flex-end}.scene{aspect-ratio:16/9}.zone b{font-size:17px}.ban .em{display:none}.oxb button{min-height:58px}}
+@media(prefers-reduced-motion:reduce){.scene .pg{animation:none!important}}
 footer{border-top:1px solid var(--line);padding:22px 0 36px;color:var(--mute);font-size:13px;text-align:center;line-height:1.7}footer b{color:var(--ink)}
 </style>
 </head>
@@ -182,7 +210,7 @@ function drawHome(){setNav('home');const all=stat(D),pct=Math.round(all.d/D.leng
   <div class="row" style="justify-content:space-between;color:var(--mute);font-size:14px;margin-bottom:14px"><span>전체 진도 ${pct}%</span><span>정답률 ${all.d?Math.round(all.c/all.d*100):0}%</span></div>
   <a href="#notes"><span>복습할 오답</span><span>${todo()}문제 ›</span></a><button class="linkbtn" id="reset" style="color:var(--mute);font-weight:500;font-size:14px">학습 기록 초기화</button></aside><div class="side"><a class="ytc" href="#m1"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgMjMwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjIzMCIgZmlsbD0iIzFjMmE3YSIvPgo8ZyBmb250LWZhbWlseT0iTm90byBTYW5zIEtSLE1hbGd1biBHb3RoaWMsQXBwbGUgU0QgR290aGljIE5lbyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIj4KPHRleHQgeD0iMzQiIHk9Ijk2IiBmb250LXNpemU9IjQ0IiBmaWxsPSIjZmZlMTRkIj417ZWZ64WEIDHtlZnquLA8L3RleHQ+PHRleHQgeD0iMzQiIHk9IjE2NCIgZm9udC1zaXplPSI2NCIgZmlsbD0iI2ZmZmZmZiI+7IiY7ZWZIE9YPC90ZXh0PjwvZz4KPGcgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2Utd2lkdGg9IjE2IiBmaWxsPSJub25lIj4KPHBhdGggZD0iTTQxMCA1MnY2ME0zODAgODJoNjAiIHN0cm9rZT0iI2ZmNmI2YiIvPjxwYXRoIGQ9Ik00OTAgODJoNjAiIHN0cm9rZT0iI2ZmZTE0ZCIvPgo8cGF0aCBkPSJNMzg2IDE0Mmw0OCA0OE00MzQgMTQybC00OCA0OCIgc3Ryb2tlPSIjN2RkM2ZjIi8+PHBhdGggZD0iTTQ5MCAxNTJoNjBNNDkwIDE4MGg2MCIgc3Ryb2tlPSIjODZlZmFjIi8+PC9nPjwvc3ZnPg==" alt="5학년 1학기 수학 OX 배너"><span class="yb"><span class="ico play"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span><span><b>5학년 1학기 수학 바로 풀기!!</b><small>자연수의 혼합 계산 외 6단원 ›</small></span></span></a><a class="cafe" href="#m2"><img class="chimg" style="width:98px;height:auto;left:8px;bottom:6px" src="${PIG}" alt="돼지 캐릭터"><span><b>5학년 2학기 수학 바로 풀기</b><small>수의 범위와 어림하기 외 6단원 ›</small></span></a></div></div>
   <h2 id="teach">과목별 학습</h2><div class="teach">${BOOKS.map(b=>{const l=D.filter(q=>q.b===b.k),t=stat(l);if(!b.file)return`<div class="sess lock" aria-disabled="true"><span class="pill">준비 중</span><b>${b.name}</b><small>🔒 공개 예정</small></div>`;return`<button class="sess" data-b="${b.k}"><span class="pill">${sesOf(b.k).length}회차 · ${l.length}문항</span><b>${b.name}</b><small>푼 문제 ${t.d} · 정답 ${t.c}</small><div class="bar"><i style="width:${t.d/l.length*100}%"></i></div></button>`}).join('')}</div>
-  <h2>도전</h2><a class="wide twr" href="#tower"><img src="${PIG}" alt=""><span><b>무한의 탑</b><small>맞히면 한 층씩! 틀리면 끝 · 최고 기록 ${(S.tower&&S.tower.best)||0}층</small></span><span class="go">›</span></a>
+  <h2>도전</h2><a class="wide twr" href="#tower"><img src="${PIG}" alt=""><span><b>무한의 탑</b><small>하트 3개로 몇 층까지? 10층마다 보스 · 최고 기록 ${(S.tower&&S.tower.best)||0}층</small></span><span class="go">›</span></a>
   <h2>복습</h2><a class="wide" href="#notes" style="color:inherit;text-decoration:none;max-width:620px"><span class="ico">${icon.note}</span><span><b>오답노트</b><small>틀린 문제를 모아서 다시 풀기 · 지금 ${todo()}문제</small></span></a>`;
   for(const b of document.querySelectorAll('.sess'))b.onclick=()=>location.hash=b.dataset.b;
   $('#cont').onclick=()=>{if(S.resume&&!S.resume.ids.every(byId)){S.resume=null;save()}if(S.resume){startRun(S.resume.ids,S.resume.title,S.resume.i,S.resume.b,S.resume.nt)}else $('#teach').scrollIntoView({behavior:'smooth'})};
@@ -219,38 +247,116 @@ function drawStudy(){setNav('');const q=byId(run.ids[run.i]),k=id(q),p=run.picke
   $('#bk').onclick=()=>location.hash=run.nt?'notes':run.b||'home';if($('#done'))$('#done').onclick=()=>{S.notes[k]=S.notes[k]==='done'?'todo':'done';save();drawStudy()};$('#pv').onclick=()=>go(-1);$('#nx').onclick=()=>go(1)}
 function answer(c){const q=byId(run.ids[run.i]);if(run.picked[id(q)])return;run.picked[id(q)]=c;record(q,c);drawStudy()}
 function go(d){const n=run.i+d;if(n<0)return;if(n>=run.ids.length){const v=Object.keys(run.picked),ok=v.filter(x=>run.picked[x]===byId(x).a).length;S.resume=null;save();toast(`${run.title} 완료 · ${v.length}문제 중 ${ok}문제 정답`);location.hash=run.nt?'notes':run.b||'home';return}run.i=n;drawStudy();scrollTo(0,0)}
-let TW=null;
-function twPool(){const sc=(S.tower&&S.tower.scope)||'all';return D.filter(q=>sc==='all'||q.b===sc)}
-function twNext(){const pool=twPool();let c=pool.filter(q=>!TW.used.has(id(q)));if(!c.length){TW.used.clear();c=pool}const q=c[Math.floor(Math.random()*c.length)];TW.used.add(id(q));TW.q=q;TW.p=null}
-function twStart(){TW={floor:0,used:new Set(),q:null,p:null,state:'play',anim:''};twNext();drawTower()}
-function twSaveBest(){S.tower=S.tower||{};if(TW.floor+1>(S.tower.best||0)){S.tower.best=TW.floor+1;save();return true}return false}
-function twStage(){const f=TW?TW.floor:0,best=(S.tower&&S.tower.best)||0;
-  let fl='';for(let i=0;i<3;i++){const n=f+i;fl+=`<div class="fl ${i===0?'now':''}" style="bottom:calc(30px + ${i} * var(--g))"><span>${n===0?'1층 출발':n+1+'층'}</span></div>`}
-  return `<div class="stage" aria-label="무한의 탑 ${f+1}층"><div class="sky"></div><div class="hud"><div><small>지금</small><span class="now">${f+1}층</span></div><div style="text-align:right"><small>최고 기록</small>${best}층</div></div>
-  <div class="floors ${TW&&TW.anim==='up'?'up':''}">${fl}</div><div class="pig ${TW&&TW.anim==='fall'?'fall':''}" id="pig"><img src="${PIG}" alt="돼지"></div></div>`}
-function drawTower(){setNav('tower');
-  if(!TW||TW.state==='ready'){const sc=(S.tower&&S.tower.scope)||'all';
-    $('#app').innerHTML=`<h1>무한의 탑</h1><p class="lead">문제를 맞히면 돼지가 달려서 한 층 올라가요. 틀리면 거기서 끝! 몇 층까지 오를 수 있을까요?</p>
-    <div class="tw">${twStage()}<section class="card"><h3 style="margin:0 0 4px;font-size:20px">출제 범위</h3><div class="scope">${[['all','전체'],...BOOKS.map(b=>[b.k,b.name])].map(([k,n])=>`<button data-k="${k}" class="${sc===k?'on':''}">${n}</button>`).join('')}</div>
-    <button class="btn p" id="ts" style="width:100%;min-height:54px;font-size:18px">도전 시작 →</button><p class="lead" style="margin:14px 0 0;font-size:14px">틀린 문제는 오답노트에도 담겨요.</p></section></div>`;
-    for(const b of document.querySelectorAll('.scope button'))b.onclick=()=>{S.tower=S.tower||{};S.tower.scope=b.dataset.k;save();TW=null;drawTower()};
-    $('#ts').onclick=twStart;return}
-  const q=TW.q,p=TW.p;
-  if(TW.state==='over'){const nb=TW.newBest;
-    $('#app').innerHTML=`<h1>무한의 탑</h1><div class="tw">${twStage()}<section class="card"><div class="over"><p class="lead" style="margin:0">${nb?'🎉 최고 기록 경신!':'아쉬워요!'}</p><div class="big">${TW.floor+1}층</div><p class="lead">까지 올라갔어요</p></div>
-    <div class="ebox"><div class="row"><span>마지막 문제 · 정답 [${q.a}]</span></div><p style="font-weight:700;margin-bottom:6px">${esc(q.q)}</p><p>${esc(q.e||'')}</p></div>
-    <div class="row" style="margin-top:16px"><button class="btn p" id="tr" style="flex:1">다시 도전 →</button><button class="btn g" id="th">범위 바꾸기</button></div></section></div>`;
-    $('#tr').onclick=twStart;$('#th').onclick=()=>{TW=null;drawTower()};return}
-  $('#app').innerHTML=`<h1>무한의 탑</h1><div class="tw">${twStage()}<section class="card"><div class="qhead"><span class="pill">${BK(q.b).name} ${q.s}회차 ${esc(BK(q.b).T[q.s])}</span></div>
-  <p class="q">${esc(q.q)}</p><div class="ox">${['O','X'].map(c=>`<button class="${c.toLowerCase()} ${p===c?'sel':''} ${p&&q.a===c?'ans':''}" data-c="${c}" aria-label="${c}" ${p?'disabled':''}>${c==='O'?'◯':'✕'} ${c}</button>`).join('')}</div>
-  ${p&&p===q.a?`<div class="res ok" style="margin-top:14px">✓ 정답! 한 층 올라가요</div>`:''}</section></div>`;
-  TW.anim='';
-  for(const b of document.querySelectorAll('.ox button'))b.onclick=()=>twAnswer(b.dataset.c)}
-function twAnswer(c){if(!TW||TW.state!=='play'||TW.p)return;TW.p=c;const ok=record(TW.q,c);
-  if(ok){drawTower();const pg=$('#pig');requestAnimationFrame(()=>pg&&pg.classList.add('run'));
-    setTimeout(()=>{if(location.hash!=='#tower'||!TW)return;TW.floor++;twNext();TW.anim='up';drawTower()},900)}
-  else{TW.state='over';TW.newBest=twSaveBest();TW.anim='fall';drawTower()}}
-document.addEventListener('keydown',e=>{if(location.hash!=='#tower'||!TW||TW.state!=='play'||$('#modal').innerHTML)return;const k=e.key.toLowerCase();if(k==='o'||k==='1')twAnswer('O');else if(k==='x'||k==='2')twAnswer('X')});
+let TW=null,TWOFF=0,TWRAF=0,TWT=0;
+const ZONES=[
+ {sub:'초원',name:'숫자 들판',ic:'🌱',sky:['#6fc3ff','#d6f1ff'],far:'#8cc7e8',far2:'#a9d8ef',mid:'#3f9e5a',mid2:'#5fc178',g:['#7a5236','#946545'],top:'#79c35b',acc:'#ffe36e',deco:'tree',stars:0,boss:'분수 슬라임',bc:['#7ad36b','#3f8f3a']},
+ {sub:'균열',name:'수정 동굴',ic:'💎',sky:['#1a1342','#3c2b80'],far:'#2c2366',far2:'#3a2f7e',mid:'#7d5bd6',mid2:'#b9a0ff',g:['#3d3170','#54479a'],top:'#8f7be0',acc:'#7ff0ff',deco:'crystal',stars:1,boss:'수정 골렘',bc:['#9b7bff','#5a3fb8']},
+ {sub:'물결',name:'별빛 호수',ic:'🌙',sky:['#0b1636','#24508f'],far:'#1d3a6b',far2:'#2a4f88',mid:'#2b8fb8',mid2:'#6fd6ff',g:['#3a3c70','#545aa0'],top:'#6fd6ff',acc:'#ffe9a6',deco:'lamp',stars:1,boss:'별빛 문지기',bc:['#8fd0ff','#3f6fd0']},
+ {sub:'열기',name:'노을 사막',ic:'🔥',sky:['#ff8f5a','#ffd79a'],far:'#e0905a',far2:'#eaa86f',mid:'#3f8f5a',mid2:'#5fb070',g:['#b8783e','#d1955a'],top:'#efc27a',acc:'#fff1c0',deco:'cactus',stars:0,boss:'모래 계산왕',bc:['#ffb15a','#c4621f']},
+ {sub:'눈꽃',name:'얼음 산맥',ic:'❄️',sky:['#8fb8ff','#e8f3ff'],far:'#b9cff0',far2:'#d3e2f7',mid:'#e9f5ff',mid2:'#9fd0ff',g:['#8aa6c8','#a9c2e0'],top:'#ffffff',acc:'#bfe6ff',deco:'ice',stars:0,boss:'눈송이 마법사',bc:['#d8f0ff','#6fa8e0']}];
+const zoneOf=f=>ZONES[Math.floor((Math.max(f,1)-1)/10)%ZONES.length];
+const isBoss=f=>f%10===0;
+const TIERS=[[150,'Diamond','#5ad1ff'],[100,'Platinum','#7fe0c8'],[60,'Gold','#f2c230'],[30,'Silver','#a9b4c8'],[0,'Bronze','#c07a45']];
+const tierOf=f=>TIERS.find(t=>f>=t[0]);
+const tIcon=t=>`<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z" fill="${t[2]}" stroke="#0004"/><path d="M12 7l1.6 3.2 3.4.5-2.5 2.4.6 3.4-3.1-1.6-3.1 1.6.6-3.4L7 10.7l3.4-.5z" fill="#fff8"/></svg>`;
+const TS=()=>{S.tower=S.tower||{};const t=S.tower;if(t.time==null)t.time=30;if(!t.scope)t.scope='all';return t};
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+
+function twDraw(){const cv=document.getElementById('twc');if(!cv){TWRAF=0;return}
+  const c=cv.getContext('2d'),W=320,H=128,now=performance.now();
+  const run=TW&&TW.runUntil>now;TWOFF+=run?2.6:0.25;const o=TWOFF,f=TW?TW.floor:((S.tower&&S.tower.cp)||0)+1,z=zoneOf(f),boss=TW&&TW.state==='play'&&isBoss(f)&&!TW.bossDown;
+  const sg=c.createLinearGradient(0,0,0,100);sg.addColorStop(0,z.sky[0]);sg.addColorStop(1,z.sky[1]);c.fillStyle=sg;c.fillRect(0,0,W,H);
+  if(z.stars)for(let i=0;i<45;i++){const x=((rnd(i)*W*1.5-o*0.04)%W+W)%W,y=rnd(i+99)*70;c.fillStyle=rnd(i+7)>.8?z.acc:'#ffffffaa';c.fillRect(x|0,y|0,1,1)}
+  else{c.fillStyle='#ffffffcc';for(let k=0;k<3;k++){const x=((k*130-o*0.08)%420+420)%420-60,y=14+k*9;c.fillRect(x,y,26,5);c.fillRect(x+6,y-3,14,3)}}
+  for(const [col,sp,amp,base,fq] of [[z.far2,0.12,10,52,31],[z.far,0.22,14,40,19]]){c.fillStyle=col;for(let x=0;x<W;x+=2){const t=x+o*sp,h=base+amp*Math.sin(t/fq)+6*Math.sin(t/7.3);c.fillRect(x,100-h,2,h)}}
+  if(z.deco==='lamp'){c.fillStyle=z.mid;c.fillRect(0,84,W,16);c.fillStyle=z.mid2;for(let i=0;i<14;i++){const x=((i*29-o*0.4)%W+W)%W;c.fillRect(x|0,88+(i%3)*4,8,1)}}
+  if(z.deco==='crystal'){c.fillStyle=z.far;for(let i=0;i<12;i++){const x=((i*41-o*0.3)%(W+40)+W+40)%(W+40)-20,h=8+rnd(i+3)*16;c.beginPath();c.moveTo(x,0);c.lineTo(x+5,h);c.lineTo(x+10,0);c.fill()}
+    const wx=((140-o*0.3)%(W+60)+W+60)%(W+60)-30;c.fillStyle='#5fd3ff99';c.fillRect(wx,10,10,90);c.fillStyle='#bff3ff';for(let y=(o*2|0)%12;y<90;y+=12)c.fillRect(wx+2,10+y,2,5)}
+  const sp=o*0.55,step=64,b0=Math.floor(sp/step);
+  for(let k=-1;k<7;k++){const id=b0+k,x=Math.round(id*step-sp+rnd(id)*24);deco(c,z,x,id)}
+  c.fillStyle=z.g[0];c.fillRect(0,100,W,28);c.fillStyle=z.top;c.fillRect(0,100,W,3);
+  c.fillStyle=z.g[1];const go=Math.floor(o)%16;for(let y=106;y<H;y+=8)for(let x=-16;x<W+16;x+=16){const xx=x-go+((y/8)%2?8:0);c.fillRect(xx,y,14,6)}
+  for(let k=-1;k<12;k++){const fo=o*1.0,st=30,id=Math.floor(fo/st)+k,x=Math.round(id*st-fo+rnd(id+40)*14),r=rnd(id+77);if(r<.35)continue;c.fillStyle=r>.7?z.acc:z.mid2;c.fillRect(x,98,2,2);c.fillRect(x+3,97,2,3);c.fillStyle=z.mid;c.fillRect(x+1,100,3,2)}
+  if(boss)bossDraw(c,z,now);
+  TWRAF=requestAnimationFrame(twDraw)}
+function deco(c,z,x,id){const r=rnd(id+5);
+  if(z.deco==='tree'){c.fillStyle='#6b4428';c.fillRect(x+9,70,5,30);c.fillStyle=z.mid;c.beginPath();c.arc(x+11,64,13+r*4,0,7);c.fill();c.fillStyle=z.mid2;c.fillRect(x+4,58,7,4);if(r>.5){c.fillStyle=z.acc;c.fillRect(x+20,95,3,3);c.fillRect(x-4,96,3,3)}}
+  else if(z.deco==='crystal'){const h=26+r*24;c.fillStyle=z.mid;c.beginPath();c.moveTo(x,100);c.lineTo(x+7,100-h);c.lineTo(x+14,100);c.fill();c.fillStyle=z.mid2;c.beginPath();c.moveTo(x+7,100-h);c.lineTo(x+10,100);c.lineTo(x+7,100);c.fill();c.fillStyle=z.acc;c.fillRect(x+6,100-h+4,1,4);if(r>.4){c.fillStyle=z.mid;c.beginPath();c.moveTo(x+14,100);c.lineTo(x+19,82);c.lineTo(x+24,100);c.fill()}}
+  else if(z.deco==='lamp'){c.fillStyle='#2a2f55';c.fillRect(x+10,66,3,34);c.fillRect(x+6,98,11,2);c.fillStyle=z.acc;c.fillRect(x+7,58,9,9);c.fillStyle=z.acc+'55';c.fillRect(x+3,54,17,17);if(r>.5){c.fillStyle=z.mid2;c.fillRect(x+26,94,10,2);c.fillRect(x+30,92,2,2)}}
+  else if(z.deco==='cactus'){c.fillStyle=z.mid;c.fillRect(x+8,74,6,26);c.fillRect(x+2,80,4,10);c.fillRect(x+2,88,8,3);c.fillRect(x+16,76,4,10);c.fillRect(x+13,84,7,3);c.fillStyle=z.mid2;c.fillRect(x+9,75,1,24)}
+  else{const h=22+r*22;c.fillStyle=z.mid2;c.beginPath();c.moveTo(x,100);c.lineTo(x+9,100-h);c.lineTo(x+18,100);c.fill();c.fillStyle=z.mid;c.beginPath();c.moveTo(x+9,100-h);c.lineTo(x+13,100-h*0.45);c.lineTo(x+5,100-h*0.45);c.fill()}}
+function bossDraw(c,z,now){const hit=TW.hitUntil>now,b=Math.sin(now/260)*2,x=238,y=100;
+  c.fillStyle='#0003';c.fillRect(x-24,y-2,48,4);
+  c.fillStyle=hit?'#ffffff':z.bc[0];c.beginPath();c.ellipse(x,y-20+b,26,22-b,0,Math.PI,0);c.fill();c.fillRect(x-26,y-20+b,52,18-b);
+  c.fillStyle=z.bc[1];c.fillRect(x-26,y-6,52,4);c.fillRect(x+12,y-36+b,6,4);
+  c.fillStyle='#fff';c.fillRect(x-14,y-28+b,8,8);c.fillRect(x+4,y-28+b,8,8);c.fillStyle='#1b1b2e';c.fillRect(x-12,y-25+b,4,5);c.fillRect(x+6,y-25+b,4,5);
+  c.fillStyle='#1b1b2e';c.fillRect(x-6,y-14+b,12,2);
+  c.fillStyle='#ffd34d';c.fillRect(x-12,y-48+b,24,5);c.fillRect(x-12,y-53+b,4,5);c.fillRect(x-2,y-55+b,4,7);c.fillRect(x+8,y-53+b,4,5);
+  c.fillStyle='#ffffffcc';c.fillRect(x-1,y-12+b+5,2,2);c.fillRect(x-4,y-9+b+5,8,1);c.fillRect(x-1,y-7+b+5,2,2)}
+function twLoop(){if(!TWRAF)TWRAF=requestAnimationFrame(twDraw)}
+
+function twPool(){const sc=TS().scope;return D.filter(q=>sc==='all'||q.b===sc)}
+function twNext(){const pool=twPool();let c=pool.filter(q=>!TW.used.has(id(q)));if(!c.length){TW.used.clear();c=pool}const q=c[Math.floor(Math.random()*c.length)];TW.used.add(id(q));TW.q=q;TW.p=null;TW.n++;TW.left=TS().time;twTick()}
+function twTick(){clearInterval(TWT);if(!TS().time)return;TWT=setInterval(()=>{if(!TW||TW.state!=='play'||TW.p){clearInterval(TWT);return}if(location.hash!=='#tower'){clearInterval(TWT);return}TW.left--;const e=$('#tt');if(e){e.textContent=fmt(TW.left);e.classList.toggle('low',TW.left<=5)}if(TW.left<=0){clearInterval(TWT);twAnswer('T')}},1000)}
+const fmt=s=>Math.floor(Math.max(s,0)/60)+':'+String(Math.max(s,0)%60).padStart(2,'0');
+function twStart(from){const t=TS();TW={floor:from,hearts:3,streak:0,n:0,used:new Set(),wrongs:[],state:'play',startTier:tierOf(t.best||0)[1],runUntil:0,hitUntil:0,bossDown:false};twNext();drawTower()}
+
+function twBar(){const f=TW?TW.floor:(TS().cp||0)+1,t=tierOf(TW?Math.max(TW.floor,TS().best||0):(TS().best||0)),h=TW?TW.hearts:3;
+  return `<div class="tbar"><div class="flag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></div>
+  <div class="fl"><small>일반모드</small><b>${f}<i>층</i></b></div><div class="tier"><div class="tn">${tIcon(t)}${t[1]}</div><div class="hearts">${[0,1,2].map(i=>i<h?'♥':'<span class="e">♥</span>').join('')}</div></div>
+  <div class="rt">${TW&&TW.state==='play'&&!TW.p&&TS().time?`<span class="timer ${TW.left<=5?'low':''}" id="tt">${fmt(TW.left)}</span>`:''}<button class="tbtn" id="tfs" aria-label="전체화면"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button><button class="tbtn" id="tset" aria-label="설정"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></div></div>`}
+function twScene(){const f=TW?TW.floor:(TS().cp||0)+1,z=zoneOf(f),boss=TW&&TW.state==='play'&&isBoss(f)&&!TW.bossDown;
+  const nb=Math.ceil(f/10)*10||10,dn=boss?TW.streak:(f-1)%10;
+  return `<div class="scene"><canvas id="twc" width="320" height="128"></canvas><img class="pg ${TW&&TW.runUntil>performance.now()?'run':''} ${TW&&TW.hurt?'hurt':''}" src="${PIG}" alt="돼지">
+  <div class="zone"><span class="zi">${boss?'👑':z.ic}</span><span><small>${boss?esc(z.boss):z.sub}</small><b>${boss?'보스방':z.name}</b></span></div>
+  ${boss?`<div class="cpb">연속 정답 ${TW.streak} / 3<div class="dash">${[0,1,2].map(i=>`<i class="${i<TW.streak?'on':''}"></i>`).join('')}</div></div>`:`<div class="cpb bot">${nb}층 체크포인트<div class="dash">${Array.from({length:9},(_,i)=>`<i class="${i<dn?'on':''}"></i>`).join('')}</div></div>`}</div>`}
+function twBind(){$('#tfs').onclick=()=>{const e=$('#tw');try{if(document.fullscreenElement||document.webkitFullscreenElement){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}else{(e.requestFullscreen||e.webkitRequestFullscreen).call(e)}}catch(_){toast('이 기기에서는 전체화면을 쓸 수 없어요')}};$('#tset').onclick=twSettings;twLoop()}
+function twSettings(){const t=TS(),m=$('#modal');const draw=()=>{m.innerHTML=`<div class="modal" id="bg"><div class="card"><div class="row" style="justify-content:space-between"><h3>무한의 탑 설정</h3><button id="mx" aria-label="닫기" style="font-size:22px;width:44px">✕</button></div>
+  <p class="lead" style="margin:10px 0 6px">출제 범위</p><div class="pick" style="grid-template-columns:1fr 1fr 1fr;margin:0">${[['all','전체'],...BOOKS.map(b=>[b.k,b.name.replace(' 수학','')])].map(([k,n])=>`<button data-s="${k}" class="${t.scope===k?'on':''}">${n}</button>`).join('')}</div>
+  <p class="lead" style="margin:16px 0 6px">문제당 제한시간</p><div class="pick" style="grid-template-columns:1fr 1fr 1fr;margin:0">${[[0,'없음'],[20,'20초'],[30,'30초']].map(([k,n])=>`<button data-t="${k}" class="${t.time===k?'on':''}">${n}</button>`).join('')}</div>
+  <p class="lead" style="margin:14px 0 0;font-size:14px">바꾼 설정은 다음 문항부터 적용돼요.</p></div></div>`;
+  for(const b of m.querySelectorAll('[data-s]'))b.onclick=()=>{t.scope=b.dataset.s;save();draw()};
+  for(const b of m.querySelectorAll('[data-t]'))b.onclick=()=>{t.time=+b.dataset.t;save();draw()};
+  $('#mx').onclick=()=>m.innerHTML='';$('#bg').onclick=e=>{if(e.target.id==='bg')m.innerHTML=''}};draw()}
+
+function drawTower(){setNav('tower');const t=TS();
+  if(!TW||TW.state==='ready'){const cp=t.cp||0,bt=tierOf(t.best||0);
+    $('#app').innerHTML=`<div id="tw">${twBar()}<div class="dark">${twScene()}<div class="row" style="justify-content:space-between;margin-top:18px;align-items:flex-end">
+    <div><h2>무한의 탑</h2><p>맞히면 한 층씩 올라가요. 하트 3개를 다 쓰면 끝! 10층마다 나오는 보스를 3연속 정답으로 쓰러뜨리면 그 층이 저장돼요.</p>
+    <p style="margin-top:10px;opacity:1">최고 기록 <b>${t.best||0}층</b> · 시즌 티어 <b>${bt[1]}</b>${cp?` · 저장된 층 <b>${cp}층</b>`:''}</p>
+    ${cp?`<div class="opts"><button id="t1">1층부터</button><button class="on" id="tc">${cp+1}층부터 이어서</button></div>`:''}</div>
+    <button class="arrow" id="tgo" aria-label="도전 시작">→</button></div></div></div>`;
+    twBind();let from=cp?cp+1:1;if(cp){$('#t1').onclick=()=>{from=1;$('#t1').classList.add('on');$('#tc').classList.remove('on')};$('#tc').onclick=()=>{from=cp+1;$('#tc').classList.add('on');$('#t1').classList.remove('on')}}
+    $('#tgo').onclick=()=>twStart(from);return}
+  if(TW.state==='trans'){const z=zoneOf(TW.floor);
+    $('#app').innerHTML=`<div id="tw">${twBar()}<div class="dark">${twScene()}<div class="row" style="justify-content:space-between;margin-top:18px;align-items:flex-end"><div><p>${TW.floor-1}층 보스를 쓰러뜨렸어요! ${TW.floor-1}층이 저장됐어요.</p><h2 style="margin-top:6px">${z.sub} · ${z.name}</h2></div><button class="arrow" id="tgo" aria-label="다음 구역으로">→</button></div></div></div>`;
+    twBind();$('#tgo').onclick=()=>{TW.state='play';twNext();drawTower()};return}
+  if(TW.state==='over'){const end=tierOf(Math.max(TW.floor,t.best||0)),up=end[1]!==TW.startTier,season=tierOf(t.best||0);
+    $('#app').innerHTML=`<div id="tw">${twBar()}<div class="res"><div class="ban"><small style="opacity:.8">일반모드</small><h2>🏆 ${end[1]} ${up?'승급':'유지'}</h2><p style="opacity:.85;margin:0">하트를 모두 사용했어요.${TW.newBest?' 최고 기록을 새로 세웠어요!':''}</p><div class="em"><img src="${PIG}" alt=""></div></div>
+    <div class="stat2"><div><small>도달 층수</small><b>${TW.floor}층</b></div><div><small>시즌 티어</small><b>${season[1]}</b></div></div>
+    <div class="row" style="justify-content:space-between"><b style="font-size:18px">📖 오답 복습</b><span style="color:var(--mute);font-weight:700">${TW.wrongs.length}문항</span></div>
+    <a href="#notes" style="color:var(--blue2);font-weight:700">복습노트에서 다시 풀기</a>
+    <div class="wl">${TW.wrongs.map((w,i)=>`<details ${i===TW.wrongs.length-1?'open':''}><summary><span><b>${w.n}번째 문항</b><br><small style="color:var(--mute)">${BK(w.q.b).name} ${w.q.s}회차 · ${w.q.n}번</small><br>${esc(w.q.q)}</span><span class="tag">${w.p==='T'?'시간 초과':'오답'}</span></summary>
+      <span class="chip me">내 답 ${w.p==='T'?'-':w.p}</span><span class="chip an">정답 ${w.q.a}</span><p style="margin:8px 0 0;white-space:pre-line">${esc(w.q.e||'')}</p></details>`).join('')}</div>
+    <div class="row"><button class="nextb" id="tr" style="flex:1">다시 도전 →</button></div></div></div>`;
+    twBind();$('#tr').onclick=()=>{TW=null;drawTower()};return}
+  const q=TW.q,p=TW.p,f=TW.floor,boss=isBoss(f)&&!TW.bossDown,ok=p&&p===q.a;
+  $('#app').innerHTML=`<div id="tw">${twBar()}${twScene()}<div class="qc"><div class="qt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg>${boss?`${f}층 보스 · OX`:`${TW.n}번째 문항`}<span class="tg">${BK(q.b).name.replace(' 수학','')} · ${q.s}단원</span></div>
+  ${boss?`<p class="bossnote">OX 3문제를 연속으로 맞히면 이 층이 저장돼요.</p>`:''}<p class="st">${esc(q.q)}</p>
+  ${p?`<div class="fb ${ok?'ok':'bad'}"><div class="h"><span>${ok?'✓ 정답이에요':p==='T'?'⏱ 시간 초과':'✕ 틀렸어요'}</span><span>정답 ${q.a}</span></div><p>${esc(q.e||'')}</p></div>`:''}</div>
+  ${p?`<button class="nextb" id="tn">${TW.hearts<=0?'결과 보기':TW.bossDown?'다음 구역으로':'다음 문항'} ›</button>`:`<div class="oxb"><button class="o" data-c="O"><span class="ic">◯</span>맞다</button><button class="x" data-c="X"><span class="ic">✕</span>틀리다</button></div>`}</div>`;
+  TW.hurt=false;twBind();
+  for(const b of document.querySelectorAll('.oxb button'))b.onclick=()=>twAnswer(b.dataset.c);
+  if($('#tn'))$('#tn').onclick=twGo}
+function twAnswer(c){if(!TW||TW.state!=='play'||TW.p)return;clearInterval(TWT);const q=TW.q,f=TW.floor,boss=isBoss(f);TW.p=c;const ok=record(q,c);
+  if(ok){if(boss){TW.streak++;TW.hitUntil=performance.now()+300;if(TW.streak>=3){TW.bossDown=true;TS().cp=Math.max(TS().cp||0,f);save()}}else{TW.floor++;TW.runUntil=performance.now()+1100}}
+  else{TW.hearts--;TW.streak=0;TW.hurt=true;TW.wrongs.push({q,p:c,n:TW.n})}
+  drawTower();if(ok&&!boss)setTimeout(()=>{const g=document.querySelector('.scene .pg');if(g&&TW&&TW.runUntil<=performance.now())g.classList.remove('run')},1150)}
+function twGo(){if(TW.hearts<=0){TW.state='over';const t=TS();TW.newBest=TW.floor>(t.best||0);if(TW.newBest){t.best=TW.floor}save();drawTower();scrollTo(0,0);return}
+  if(TW.bossDown){TW.floor++;TW.bossDown=false;TW.streak=0;TW.state='trans';TW.runUntil=performance.now()+1400;drawTower();return}
+  twNext();drawTower()}
+document.addEventListener('keydown',e=>{if(location.hash!=='#tower'||!TW||TW.state!=='play'||$('#modal').innerHTML)return;const k=e.key.toLowerCase();
+  if(!TW.p){if(k==='o'||k==='1')twAnswer('O');else if(k==='x'||k==='2')twAnswer('X')}else if(k==='enter'||k==='arrowright')twGo()});
 document.addEventListener('keydown',e=>{if(location.hash!=='#study'||!run||$('#modal').innerHTML||e.target.tagName==='SELECT')return;const k=e.key.toLowerCase();
   if(k==='o'||k==='1')answer('O');else if(k==='x'||k==='2')answer('X');else if(k==='arrowright'||k==='enter')go(1);else if(k==='arrowleft')go(-1)});
 
